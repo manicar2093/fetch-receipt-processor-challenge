@@ -2,9 +2,10 @@ package paginator_test
 
 import (
 	"log"
-	"template/pkg/config"
-	"template/pkg/paginator"
 	"testing"
+
+	"github.com/manicar2093/fetch-receipt-processor-challenge/pkg/config"
+	"github.com/manicar2093/fetch-receipt-processor-challenge/pkg/paginator"
 
 	"github.com/bxcodec/faker/v3"
 	"gorm.io/driver/postgres"

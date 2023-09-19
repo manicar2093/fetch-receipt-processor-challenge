@@ -2,9 +2,10 @@ package connections
 
 import (
 	"sync"
-	"template/pkg/config"
-	"template/pkg/logger"
 	"time"
+
+	"github.com/manicar2093/fetch-receipt-processor-challenge/pkg/config"
+	"github.com/manicar2093/fetch-receipt-processor-challenge/pkg/logger"
 
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"

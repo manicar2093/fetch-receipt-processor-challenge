@@ -2,8 +2,9 @@ package validator_test
 
 import (
 	"net/http"
-	"template/pkg/apperrors"
-	"template/pkg/validator"
+
+	"github.com/manicar2093/fetch-receipt-processor-challenge/pkg/apperrors"
+	"github.com/manicar2093/fetch-receipt-processor-challenge/pkg/validator"
 
 	"github.com/bxcodec/faker/v3"
 	"github.com/google/uuid"

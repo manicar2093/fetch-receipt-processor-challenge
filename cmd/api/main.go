@@ -3,10 +3,11 @@ package main
 import (
 	"flag"
 	"fmt"
-	"template/cmd/api/controllers"
-	"template/pkg/config"
-	"template/pkg/logger"
-	"template/pkg/validator"
+
+	"github.com/manicar2093/fetch-receipt-processor-challenge/cmd/api/controllers"
+	"github.com/manicar2093/fetch-receipt-processor-challenge/pkg/config"
+	"github.com/manicar2093/fetch-receipt-processor-challenge/pkg/logger"
+	"github.com/manicar2093/fetch-receipt-processor-challenge/pkg/validator"
 
 	"github.com/labstack/echo/v4"
 )
@@ -15,8 +16,8 @@ var (
 	port = flag.String("port", "5001", "app port to use")
 )
 
-//	@title		fetch-receipt-processor-challenge
-//	@version	0.0.0
+// @title		fetch-receipt-processor-challenge
+// @version	0.0.0
 func main() {
 	var (
 		echoInstance      = echo.New()
