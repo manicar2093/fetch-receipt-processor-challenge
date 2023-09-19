@@ -1,4 +1,4 @@
-module template
+module github.com/manicar2093/fetch-receipt-processor-challenge
 
 go 1.20
 

@@ -7,6 +7,10 @@ import (
 	. "github.com/onsi/gomega"
 )
 
+var (
+	T = GinkgoT()
+)
+
 func TestReceipts(t *testing.T) {
 	RegisterFailHandler(Fail)
 	RunSpecs(t, "Receipts Suite")

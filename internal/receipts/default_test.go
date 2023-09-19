@@ -7,23 +7,24 @@ import (
 	. "github.com/onsi/ginkgo/v2"
 	. "github.com/onsi/gomega"
 
-	"template/internal/receipts"
+	"github.com/manicar2093/fetch-receipt-processor-challenge/internal/receipts"
+	"github.com/manicar2093/fetch-receipt-processor-challenge/mocks"
 )
 
 var _ = Describe("Default", func() {
 
 	var (
-		receiptRepositoryMock *mocks.ReceiptsRepositoryMock
-		pointCalculatorMock1  *mocks.PointCaluculator
-		pointCalculatorMock2  *mocks.PointCaluculator
+		receiptRepositoryMock *mocks.ReceiptRepo
+		pointCalculatorMock1  *mocks.PointCalculator
+		pointCalculatorMock2  *mocks.PointCalculator
 		service               *receipts.DefaultService
 	)
 
 	BeforeEach(func() {
-		receiptRepositoryMock = mocks.NewReceiptsRepositoryMock(T)
+		receiptRepositoryMock = mocks.NewReceiptRepo(T)
 		pointCalculatorMock1 = mocks.NewPointCalculator(T)
 		pointCalculatorMock2 = mocks.NewPointCalculator(T)
-		service = receipts.DefaultService(receiptRepositoryMock, pointCalculatorMock1.Execute, pointCalculatorMock2.Execute)
+		service = receipts.NewDefaultService(receiptRepositoryMock, pointCalculatorMock1.Execute, pointCalculatorMock2.Execute)
 	})
 
 	Describe("Process", func() {

@@ -16,8 +16,6 @@ mocking:
 	@ mockery
 
 test:
-	@ dotenv -e .env.test -- npx prisma db push
-	@ dotenv -e .env.test -- npx prisma db seed
 ifdef FILE
 	@ dotenv -e .env.test -- go run github.com/onsi/ginkgo/v2/ginkgo $(FILE)
 else
