@@ -15,5 +15,19 @@ func NewDefaultService(receiptRepo ReceiptRepo, pointCalcs ...PointCalculator) *
 }
 
 func (c *DefaultService) Process(input Receipt) (ProcessOutput, error) {
-	panic("not implemented")
+	var pointsGenerated int
+	for _, calc := range c.pointCalculators {
+		pointsGenerated += calc(input)
+	}
+	toSave := ReceiptWithPoints{
+		Receipt:         input,
+		GeneratedPoints: pointsGenerated,
+	}
+	if err := c.receiptRepo.Save(&toSave); err != nil {
+		return ProcessOutput{}, err
+	}
+
+	return ProcessOutput{
+		Id: toSave.Id,
+	}, nil
 }

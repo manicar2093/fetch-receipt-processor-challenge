@@ -8,7 +8,6 @@ require (
 	github.com/google/uuid v1.3.1
 	github.com/gookit/validate v1.4.6
 	github.com/labstack/echo/v4 v4.11.1
-	github.com/lib/pq v1.10.9
 	github.com/manicar2093/echoroutesview v0.1.0
 	github.com/manicar2093/goption v0.3.0
 	github.com/onsi/ginkgo/v2 v2.9.2
@@ -18,8 +17,6 @@ require (
 	github.com/stretchr/testify v1.8.4
 	github.com/swaggo/echo-swagger v1.3.5
 	github.com/swaggo/swag v1.16.1
-	gorm.io/driver/postgres v1.4.6
-	gorm.io/gorm v1.24.3
 )
 
 require (
@@ -43,11 +40,6 @@ require (
 	github.com/hashicorp/hcl v1.0.0 // indirect
 	github.com/huandu/xstrings v1.4.0 // indirect
 	github.com/imdario/mergo v0.3.16 // indirect
-	github.com/jackc/pgpassfile v1.0.0 // indirect
-	github.com/jackc/pgservicefile v0.0.0-20221227161230-091c0ba34f0a // indirect
-	github.com/jackc/pgx/v5 v5.2.0 // indirect
-	github.com/jinzhu/inflection v1.0.0 // indirect
-	github.com/jinzhu/now v1.1.5 // indirect
 	github.com/josharian/intern v1.0.0 // indirect
 	github.com/labstack/gommon v0.4.0 // indirect
 	github.com/magiconair/properties v1.8.7 // indirect
