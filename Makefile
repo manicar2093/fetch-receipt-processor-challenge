@@ -8,7 +8,7 @@ else
 	@ dotenv -e .env.dev -- go run cmd/api/*.go
 endif
 
-run_demo: build
+run_demo: build_image
 	@ docker run --rm -e ENVIRONMENT=prod -p 8000:5001 --name fetch-receipt-processor-demo fetch-receipt-processor-challenge:latest
 
 build:
