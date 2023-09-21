@@ -9,16 +9,16 @@ import (
 type (
 	Receipt struct {
 		Id           uuid.UUID
-		Retailer     string
-		PurchaseDate time.Time
-		PurchaseTime string
-		Total        float64
-		Items        []ReceiptItem
+		Retailer     string        `json:"retailer"`
+		PurchaseDate time.Time     `json:"purchaseDate"`
+		PurchaseTime string        `json:"purchaseTime"`
+		Total        float64       `json:"total"`
+		Items        []ReceiptItem `json:"items"`
 	}
 
 	ReceiptItem struct {
-		ShortDescription string
-		Price            float64
+		ShortDescription string  `json:"shortDescription"`
+		Price            float64 `json:"price"`
 	}
 
 	ReceiptWithPoints struct {
