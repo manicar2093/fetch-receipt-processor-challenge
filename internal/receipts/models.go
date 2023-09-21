@@ -7,16 +7,16 @@ import (
 type (
 	Receipt struct {
 		Id           uuid.UUID
-		Retailer     string        `json:"retailer"`
-		PurchaseDate Date          `json:"purchaseDate"`
-		PurchaseTime string        `json:"purchaseTime"`
-		Total        float64       `json:"total,string"`
-		Items        []ReceiptItem `json:"items"`
+		Retailer     string        `json:"retailer" validate:"required"`
+		PurchaseDate Date          `json:"purchaseDate" validate:"required"`
+		PurchaseTime string        `json:"purchaseTime" validate:"required"`
+		Total        float64       `json:"total,string" validate:"required"`
+		Items        []ReceiptItem `json:"items" validate:"min_len:1"`
 	}
 
 	ReceiptItem struct {
-		ShortDescription string  `json:"shortDescription"`
-		Price            float64 `json:"price,string"`
+		ShortDescription string  `json:"shortDescription" validate:"required"`
+		Price            float64 `json:"price,string" validate:"required"`
 	}
 
 	ReceiptWithPoints struct {
