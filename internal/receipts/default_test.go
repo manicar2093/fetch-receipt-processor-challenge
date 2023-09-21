@@ -3,6 +3,7 @@ package receipts_test
 import (
 	"time"
 
+	"github.com/bxcodec/faker/v3"
 	"github.com/google/uuid"
 	. "github.com/onsi/ginkgo/v2"
 	. "github.com/onsi/gomega"
@@ -69,4 +70,27 @@ var _ = Describe("Default", func() {
 		})
 	})
 
+	Describe("FindPointsByReceiptId", func() {
+		It("returns a receipt generated points by id", func() {
+			var (
+				expectedReceiptId = uuid.New()
+				expectedInput     = receipts.FindPointsByReceiptIdInput{
+					ReceiptId: expectedReceiptId,
+				}
+				expectedGeneratedPoints         = int(faker.Latitude())
+				expectedReceiptWithPointsReturn = receipts.ReceiptWithPoints{
+					Receipt: receipts.Receipt{
+						Id: expectedReceiptId,
+					},
+					GeneratedPoints: expectedGeneratedPoints,
+				}
+			)
+			receiptRepositoryMock.EXPECT().FindById(expectedReceiptId).Return(expectedReceiptWithPointsReturn, nil)
+
+			got, err := service.FindPointsByReceiptId(expectedInput)
+
+			Expect(err).ToNot(HaveOccurred())
+			Expect(got.Points).To(Equal(expectedGeneratedPoints))
+		})
+	})
 })
