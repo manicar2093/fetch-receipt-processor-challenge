@@ -24,13 +24,12 @@ var (
 // @version	0.0.0
 func main() {
 	var (
-		echoInstance      = echo.New()
-		baseEndpoint      = ""
-		gookitValidator   = validator.NewGooKitValidator()
-		initialController = controllers.NewInitial()
-		concurrentMap     = cmap.New[*receipts.ReceiptWithPoints]()
-		receiptRepo       = receipts.NewCMapRepo(uuid.New, concurrentMap)
-		receiptService    = receipts.NewDefaultService(
+		echoInstance    = echo.New()
+		baseEndpoint    = ""
+		gookitValidator = validator.NewGooKitValidator()
+		concurrentMap   = cmap.New[*receipts.ReceiptWithPoints]()
+		receiptRepo     = receipts.NewCMapRepo(uuid.New, concurrentMap)
+		receiptService  = receipts.NewDefaultService(
 			receiptRepo,
 			pointscalcs.ByRetailerName,
 			pointscalcs.ByRoundedTotal,
@@ -41,7 +40,7 @@ func main() {
 			pointscalcs.ByPurchaseTwoFourInterval,
 		)
 		receiptController = controllers.NewReceipt(receiptService)
-		server            = NewServer(echoInstance, gookitValidator, baseEndpoint, initialController, receiptController)
+		server            = NewServer(echoInstance, gookitValidator, baseEndpoint, receiptController)
 	)
 
 	flag.Parse()
