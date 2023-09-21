@@ -98,10 +98,6 @@ var _ = Describe("Gookitvalidator", func() {
 				Expect(errMap["name"]["required"]).To(ContainSubstring(expectedSubstring))
 			})
 		})
-
-		It("validates a goption.Optional", func() {
-
-		})
 	})
 
 })

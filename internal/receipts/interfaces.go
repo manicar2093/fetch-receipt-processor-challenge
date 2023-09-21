@@ -8,4 +8,6 @@ type (
 		Save(*ReceiptWithPoints) error
 		FindById(uuid.UUID) (*ReceiptWithPoints, error)
 	}
+
+	UUIDGen func() uuid.UUID
 )
