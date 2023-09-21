@@ -41,6 +41,150 @@ const docTemplate = `{
                     }
                 }
             }
+        },
+        "/receipts/process": {
+            "post": {
+                "description": "Process a receipt calculating generated points",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Receipt"
+                ],
+                "summary": "Process a receipt",
+                "parameters": [
+                    {
+                        "description": "Receipt to be process",
+                        "name": "receipt_to_process",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/receipts.Receipt"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Receipt created data",
+                        "schema": {
+                            "$ref": "#/definitions/receipts.ProcessOutput"
+                        }
+                    },
+                    "500": {
+                        "description": "Something unidentified has occurred"
+                    }
+                }
+            }
+        },
+        "/receipts/{id}/points": {
+            "get": {
+                "description": "Returns a receipt registered points by receipt id",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Receipt"
+                ],
+                "summary": "Returns a receipt registered points by receipt id",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "receipt UUID to get",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Receipt points data",
+                        "schema": {
+                            "$ref": "#/definitions/receipts.FindPointsByReceiptIdOutput"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/apperrors.MessagedError"
+                        }
+                    },
+                    "500": {
+                        "description": "Something unidentified has occurred"
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "apperrors.MessagedError": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "type": "integer"
+                },
+                "message": {
+                    "type": "string"
+                }
+            }
+        },
+        "receipts.FindPointsByReceiptIdOutput": {
+            "type": "object",
+            "properties": {
+                "points": {
+                    "type": "integer"
+                }
+            }
+        },
+        "receipts.ProcessOutput": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "string"
+                }
+            }
+        },
+        "receipts.Receipt": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "string"
+                },
+                "items": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/receipts.ReceiptItem"
+                    }
+                },
+                "purchaseDate": {
+                    "type": "string"
+                },
+                "purchaseTime": {
+                    "type": "string"
+                },
+                "retailer": {
+                    "type": "string"
+                },
+                "total": {
+                    "type": "number"
+                }
+            }
+        },
+        "receipts.ReceiptItem": {
+            "type": "object",
+            "properties": {
+                "price": {
+                    "type": "number"
+                },
+                "shortDescription": {
+                    "type": "string"
+                }
+            }
         }
     }
 }`

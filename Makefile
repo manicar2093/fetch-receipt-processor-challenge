@@ -38,7 +38,6 @@ gen_swag:
 fmt:
 	@ go fmt ./...
 	@ swag fmt
-	@ npx prisma format
 
 version:
 	@ cz version -p

@@ -1,3 +1,45 @@
+definitions:
+  apperrors.MessagedError:
+    properties:
+      code:
+        type: integer
+      message:
+        type: string
+    type: object
+  receipts.FindPointsByReceiptIdOutput:
+    properties:
+      points:
+        type: integer
+    type: object
+  receipts.ProcessOutput:
+    properties:
+      id:
+        type: string
+    type: object
+  receipts.Receipt:
+    properties:
+      id:
+        type: string
+      items:
+        items:
+          $ref: '#/definitions/receipts.ReceiptItem'
+        type: array
+      purchaseDate:
+        type: string
+      purchaseTime:
+        type: string
+      retailer:
+        type: string
+      total:
+        type: number
+    type: object
+  receipts.ReceiptItem:
+    properties:
+      price:
+        type: number
+      shortDescription:
+        type: string
+    type: object
 info:
   contact: {}
   title: fetch-receipt-processor-challenge
@@ -20,4 +62,55 @@ paths:
       summary: Gets a json welcome message
       tags:
       - initial
+  /receipts/{id}/points:
+    get:
+      consumes:
+      - application/json
+      description: Returns a receipt registered points by receipt id
+      parameters:
+      - description: receipt UUID to get
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Receipt points data
+          schema:
+            $ref: '#/definitions/receipts.FindPointsByReceiptIdOutput'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/apperrors.MessagedError'
+        "500":
+          description: Something unidentified has occurred
+      summary: Returns a receipt registered points by receipt id
+      tags:
+      - Receipt
+  /receipts/process:
+    post:
+      consumes:
+      - application/json
+      description: Process a receipt calculating generated points
+      parameters:
+      - description: Receipt to be process
+        in: body
+        name: receipt_to_process
+        required: true
+        schema:
+          $ref: '#/definitions/receipts.Receipt'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Receipt created data
+          schema:
+            $ref: '#/definitions/receipts.ProcessOutput'
+        "500":
+          description: Something unidentified has occurred
+      summary: Process a receipt
+      tags:
+      - Receipt
 swagger: "2.0"

@@ -12,13 +12,13 @@ type (
 		Retailer     string        `json:"retailer"`
 		PurchaseDate time.Time     `json:"purchaseDate"`
 		PurchaseTime string        `json:"purchaseTime"`
-		Total        float64       `json:"total"`
+		Total        float64       `json:"total,string"`
 		Items        []ReceiptItem `json:"items"`
 	}
 
 	ReceiptItem struct {
 		ShortDescription string  `json:"shortDescription"`
-		Price            float64 `json:"price"`
+		Price            float64 `json:"price,string"`
 	}
 
 	ReceiptWithPoints struct {
@@ -27,7 +27,7 @@ type (
 	}
 
 	ProcessOutput struct {
-		Id uuid.UUID
+		Id uuid.UUID `json:"id"`
 	}
 
 	FindPointsByReceiptIdInput struct {
