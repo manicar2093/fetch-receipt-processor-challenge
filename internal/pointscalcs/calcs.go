@@ -4,13 +4,23 @@ import (
 	"math"
 	"strings"
 	"time"
+	"unicode"
 
 	"github.com/manicar2093/fetch-receipt-processor-challenge/internal/receipts"
 	"github.com/manicar2093/fetch-receipt-processor-challenge/pkg/logger"
 )
 
+var log = logger.GetLogger()
+
 func ByRetailerName(r receipts.Receipt) int {
-	return len(r.Retailer)
+	var points int
+	for _, letter := range r.Retailer {
+		if unicode.IsLetter(letter) {
+			points += 1
+		}
+	}
+	log.WithField("generated_points", points).Debug("ByRetailerName")
+	return points
 }
 
 func ByRoundedTotal(r receipts.Receipt) int {
@@ -18,6 +28,7 @@ func ByRoundedTotal(r receipts.Receipt) int {
 	if isInteger(r.Total) {
 		points = 50
 	}
+	log.WithField("generated_points", points).Debug("ByRoundedTotal")
 	return points
 }
 
@@ -29,6 +40,7 @@ func ByTotalMultipleOf25(r receipts.Receipt) int {
 	if isInteger(divRes) {
 		points = 25
 	}
+	log.WithField("generated_points", points).Debug("ByTotalMultipleOf25")
 	return points
 }
 
@@ -36,9 +48,11 @@ func ByEach2Items(r receipts.Receipt) int {
 	var (
 		itemsLen        = float64(len(r.Items)) / 2
 		itemsLenFloored = math.Floor(itemsLen)
+		points          = int(itemsLenFloored) * 5
 	)
+	log.WithField("generated_points", points).Debug("ByEach2Items")
 
-	return int(itemsLenFloored) * 5
+	return points
 }
 
 func ByItemTrimmedDescription(r receipts.Receipt) int {
@@ -51,6 +65,7 @@ func ByItemTrimmedDescription(r receipts.Receipt) int {
 		}
 		points += int(math.Ceil(item.Price * .2))
 	}
+	log.WithField("generated_points", points).Debug("ByItemTrimmedDescription")
 
 	return points
 }
@@ -60,6 +75,8 @@ func ByPurchaseDayIsOdd(r receipts.Receipt) int {
 	if r.PurchaseDate.Day()%2 != 0 {
 		points = 6
 	}
+	log.WithField("generated_points", points).Debug("ByPurchaseDayIsOdd")
+
 	return points
 }
 
@@ -78,6 +95,8 @@ func ByPurchaseTwoFourInterval(receipt receipts.Receipt) int {
 	if t.After(initTime) && t.Before(finalTime) {
 		points = 10
 	}
+	log.WithField("generated_points", points).Debug("ByPurchaseTwoFourInterval")
+
 	return points
 }
 
