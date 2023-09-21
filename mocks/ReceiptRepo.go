@@ -3,6 +3,7 @@
 package mocks
 
 import (
+	uuid "github.com/google/uuid"
 	receipts "github.com/manicar2093/fetch-receipt-processor-challenge/internal/receipts"
 	mock "github.com/stretchr/testify/mock"
 )
@@ -18,6 +19,60 @@ type ReceiptRepo_Expecter struct {
 
 func (_m *ReceiptRepo) EXPECT() *ReceiptRepo_Expecter {
 	return &ReceiptRepo_Expecter{mock: &_m.Mock}
+}
+
+// FindById provides a mock function with given fields: _a0
+func (_m *ReceiptRepo) FindById(_a0 uuid.UUID) (*receipts.ReceiptWithPoints, error) {
+	ret := _m.Called(_a0)
+
+	var r0 *receipts.ReceiptWithPoints
+	var r1 error
+	if rf, ok := ret.Get(0).(func(uuid.UUID) (*receipts.ReceiptWithPoints, error)); ok {
+		return rf(_a0)
+	}
+	if rf, ok := ret.Get(0).(func(uuid.UUID) *receipts.ReceiptWithPoints); ok {
+		r0 = rf(_a0)
+	} else {
+		if ret.Get(0) != nil {
+			r0 = ret.Get(0).(*receipts.ReceiptWithPoints)
+		}
+	}
+
+	if rf, ok := ret.Get(1).(func(uuid.UUID) error); ok {
+		r1 = rf(_a0)
+	} else {
+		r1 = ret.Error(1)
+	}
+
+	return r0, r1
+}
+
+// ReceiptRepo_FindById_Call is a *mock.Call that shadows Run/Return methods with type explicit version for method 'FindById'
+type ReceiptRepo_FindById_Call struct {
+	*mock.Call
+}
+
+// FindById is a helper method to define mock.On call
+//   - _a0 uuid.UUID
+func (_e *ReceiptRepo_Expecter) FindById(_a0 interface{}) *ReceiptRepo_FindById_Call {
+	return &ReceiptRepo_FindById_Call{Call: _e.mock.On("FindById", _a0)}
+}
+
+func (_c *ReceiptRepo_FindById_Call) Run(run func(_a0 uuid.UUID)) *ReceiptRepo_FindById_Call {
+	_c.Call.Run(func(args mock.Arguments) {
+		run(args[0].(uuid.UUID))
+	})
+	return _c
+}
+
+func (_c *ReceiptRepo_FindById_Call) Return(_a0 *receipts.ReceiptWithPoints, _a1 error) *ReceiptRepo_FindById_Call {
+	_c.Call.Return(_a0, _a1)
+	return _c
+}
+
+func (_c *ReceiptRepo_FindById_Call) RunAndReturn(run func(uuid.UUID) (*receipts.ReceiptWithPoints, error)) *ReceiptRepo_FindById_Call {
+	_c.Call.Return(run)
+	return _c
 }
 
 // Save provides a mock function with given fields: _a0

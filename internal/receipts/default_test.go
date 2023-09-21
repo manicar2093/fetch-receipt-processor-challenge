@@ -85,7 +85,7 @@ var _ = Describe("Default", func() {
 					GeneratedPoints: expectedGeneratedPoints,
 				}
 			)
-			receiptRepositoryMock.EXPECT().FindById(expectedReceiptId).Return(expectedReceiptWithPointsReturn, nil)
+			receiptRepositoryMock.EXPECT().FindById(expectedReceiptId).Return(&expectedReceiptWithPointsReturn, nil)
 
 			got, err := service.FindPointsByReceiptId(expectedInput)
 

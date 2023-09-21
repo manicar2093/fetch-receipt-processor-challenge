@@ -29,4 +29,12 @@ type (
 	ProcessOutput struct {
 		Id uuid.UUID
 	}
+
+	FindPointsByReceiptIdInput struct {
+		ReceiptId uuid.UUID `param:"id"`
+	}
+
+	FindPointsByReceiptIdOutput struct {
+		Points int `json:"points"`
+	}
 )

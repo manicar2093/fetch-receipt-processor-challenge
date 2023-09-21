@@ -31,3 +31,14 @@ func (c *DefaultService) Process(input Receipt) (ProcessOutput, error) {
 		Id: toSave.Id,
 	}, nil
 }
+
+func (c *DefaultService) FindPointsByReceiptId(input FindPointsByReceiptIdInput) (FindPointsByReceiptIdOutput, error) {
+	receiptWPointsFound, err := c.receiptRepo.FindById(input.ReceiptId)
+	if err != nil {
+		return FindPointsByReceiptIdOutput{}, err
+	}
+
+	return FindPointsByReceiptIdOutput{
+		Points: receiptWPointsFound.GeneratedPoints,
+	}, nil
+}
