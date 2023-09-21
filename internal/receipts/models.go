@@ -1,8 +1,6 @@
 package receipts
 
 import (
-	"time"
-
 	"github.com/google/uuid"
 )
 
@@ -10,7 +8,7 @@ type (
 	Receipt struct {
 		Id           uuid.UUID
 		Retailer     string        `json:"retailer"`
-		PurchaseDate time.Time     `json:"purchaseDate"`
+		PurchaseDate Date          `json:"purchaseDate"`
 		PurchaseTime string        `json:"purchaseTime"`
 		Total        float64       `json:"total,string"`
 		Items        []ReceiptItem `json:"items"`

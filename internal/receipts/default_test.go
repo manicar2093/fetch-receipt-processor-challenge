@@ -33,7 +33,7 @@ var _ = Describe("Default", func() {
 			var (
 				expectedInput = receipts.Receipt{
 					Retailer:     "Walgreens",
-					PurchaseDate: time.Date(2022, time.January, 2, 0, 0, 0, 0, time.Local),
+					PurchaseDate: receipts.Date{Time: time.Date(2022, time.January, 2, 0, 0, 0, 0, time.Local)},
 					PurchaseTime: "08:13",
 					Total:        2.65,
 					Items: []receipts.ReceiptItem{

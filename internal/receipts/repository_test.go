@@ -33,7 +33,7 @@ var _ = Describe("Repository", Ordered, func() {
 		expectedReceiptSaved = receipts.ReceiptWithPoints{
 			Receipt: receipts.Receipt{
 				Retailer:     faker.Name(),
-				PurchaseDate: time.Date(2023, time.September, 21, 0, 0, 0, 0, time.UTC),
+				PurchaseDate: receipts.Date{Time: time.Date(2023, time.September, 21, 0, 0, 0, 0, time.UTC)},
 				PurchaseTime: "14:22",
 				Total:        faker.Latitude(),
 				Items: []receipts.ReceiptItem{

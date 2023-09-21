@@ -8,6 +8,7 @@ import (
 
 	"github.com/manicar2093/fetch-receipt-processor-challenge/internal/receipts"
 	"github.com/manicar2093/fetch-receipt-processor-challenge/pkg/logger"
+	"github.com/sirupsen/logrus"
 )
 
 var log = logger.GetLogger()
@@ -19,7 +20,10 @@ func ByRetailerName(r receipts.Receipt) int {
 			points += 1
 		}
 	}
-	log.WithField("generated_points", points).Debug("ByRetailerName")
+	log.WithFields(logrus.Fields{
+		"generated_points": points,
+		"calculator":       "ByRetailerName",
+	}).Debug("points calculation")
 	return points
 }
 
@@ -28,7 +32,10 @@ func ByRoundedTotal(r receipts.Receipt) int {
 	if isInteger(r.Total) {
 		points = 50
 	}
-	log.WithField("generated_points", points).Debug("ByRoundedTotal")
+	log.WithFields(logrus.Fields{
+		"generated_points": points,
+		"calculator":       "ByRoundedTotal",
+	}).Debug("points calculation")
 	return points
 }
 
@@ -40,7 +47,10 @@ func ByTotalMultipleOf25(r receipts.Receipt) int {
 	if isInteger(divRes) {
 		points = 25
 	}
-	log.WithField("generated_points", points).Debug("ByTotalMultipleOf25")
+	log.WithFields(logrus.Fields{
+		"generated_points": points,
+		"calculator":       "ByTotalMultipleOf25",
+	}).Debug("points calculation")
 	return points
 }
 
@@ -50,7 +60,10 @@ func ByEach2Items(r receipts.Receipt) int {
 		itemsLenFloored = math.Floor(itemsLen)
 		points          = int(itemsLenFloored) * 5
 	)
-	log.WithField("generated_points", points).Debug("ByEach2Items")
+	log.WithFields(logrus.Fields{
+		"generated_points": points,
+		"calculator":       "ByEach2Items",
+	}).Debug("points calculation")
 
 	return points
 }
@@ -65,7 +78,10 @@ func ByItemTrimmedDescription(r receipts.Receipt) int {
 		}
 		points += int(math.Ceil(item.Price * .2))
 	}
-	log.WithField("generated_points", points).Debug("ByItemTrimmedDescription")
+	log.WithFields(logrus.Fields{
+		"generated_points": points,
+		"calculator":       "ByItemTrimmedDescription",
+	}).Debug("points calculation")
 
 	return points
 }
@@ -75,7 +91,10 @@ func ByPurchaseDayIsOdd(r receipts.Receipt) int {
 	if r.PurchaseDate.Day()%2 != 0 {
 		points = 6
 	}
-	log.WithField("generated_points", points).Debug("ByPurchaseDayIsOdd")
+	log.WithFields(logrus.Fields{
+		"generated_points": points,
+		"calculator":       "ByPurchaseDayIsOdd",
+	}).Debug("points calculation")
 
 	return points
 }
@@ -95,7 +114,10 @@ func ByPurchaseTwoFourInterval(receipt receipts.Receipt) int {
 	if t.After(initTime) && t.Before(finalTime) {
 		points = 10
 	}
-	log.WithField("generated_points", points).Debug("ByPurchaseTwoFourInterval")
+	log.WithFields(logrus.Fields{
+		"generated_points": points,
+		"calculator":       "ByPurchaseTwoFourInterval",
+	}).Debug("points calculation")
 
 	return points
 }
