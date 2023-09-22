@@ -6,11 +6,6 @@ definitions:
       message:
         type: string
     type: object
-  receipts.Date:
-    properties:
-      time.Time:
-        type: string
-    type: object
   receipts.FindPointsByReceiptIdOutput:
     properties:
       points:
@@ -30,7 +25,7 @@ definitions:
           $ref: '#/definitions/receipts.ReceiptItem'
         type: array
       purchaseDate:
-        $ref: '#/definitions/receipts.Date'
+        type: string
       purchaseTime:
         type: string
       retailer:
@@ -57,8 +52,6 @@ definitions:
     type: object
 info:
   contact: {}
-  title: fetch-receipt-processor-challenge
-  version: 0.0.0
 paths:
   /receipts/{id}/points:
     get:

@@ -118,7 +118,7 @@ var _ = Describe("Calcs", func() {
 		It("gives 6 points if the day in the purchase date is odd", func() {
 			var (
 				expectedReceipt = receipts.Receipt{
-					PurchaseDate: receipts.Date{Time: time.Date(2022, time.January, 1, 0, 0, 0, 0, time.Local)},
+					PurchaseDate: receipts.Date(time.Date(2022, time.January, 1, 0, 0, 0, 0, time.Local)),
 				}
 				expectedPoints = 6
 			)

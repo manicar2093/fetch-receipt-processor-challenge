@@ -1,9 +1,7 @@
 {
     "swagger": "2.0",
     "info": {
-        "title": "fetch-receipt-processor-challenge",
-        "contact": {},
-        "version": "0.0.0"
+        "contact": {}
     },
     "paths": {
         "/receipts/process": {
@@ -97,14 +95,6 @@
                 }
             }
         },
-        "receipts.Date": {
-            "type": "object",
-            "properties": {
-                "time.Time": {
-                    "type": "string"
-                }
-            }
-        },
         "receipts.FindPointsByReceiptIdOutput": {
             "type": "object",
             "properties": {
@@ -140,7 +130,7 @@
                     }
                 },
                 "purchaseDate": {
-                    "$ref": "#/definitions/receipts.Date"
+                    "type": "string"
                 },
                 "purchaseTime": {
                     "type": "string"
