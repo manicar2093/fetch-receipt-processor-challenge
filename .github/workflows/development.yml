@@ -22,22 +22,6 @@ jobs:
   testing:
     name: test
     runs-on: ubuntu-latest
-    services:
-      mongo:
-        image: mongo
-        ports:
-          - 27017:27017
-        env:
-          MONGO_INITDB_ROOT_USERNAME: development
-          MONGO_INITDB_ROOT_PASSWORD: development
-      postgres:
-        image: postgres
-        ports:
-          - 3456:5432
-        env:
-            POSTGRES_USER: development
-            POSTGRES_PASSWORD: development
-            POSTGRES_DB: development
     steps:
       - name: Set up NodeJS
         uses: actions/setup-node@v1
@@ -56,6 +40,5 @@ jobs:
           go install -mod=mod github.com/onsi/ginkgo/v2/ginkgo
           go install github.com/swaggo/swag/cmd/swag@latest
           npm install -g dotenv-cli
-          npm i --include=dev
       - name: Tests
         run: make test

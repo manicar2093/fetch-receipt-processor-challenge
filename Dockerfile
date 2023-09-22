@@ -17,6 +17,6 @@ RUN apk add tzdata
 
 COPY --from=builder /app/server /server
 
-EXPOSE 8000
+EXPOSE 5001
 
 CMD [ "/server" ]

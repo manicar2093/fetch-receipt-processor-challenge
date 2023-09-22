@@ -3,8 +3,9 @@ package apperrors
 import (
 	"fmt"
 	"net/http"
-	"template/pkg/logger"
-	"template/pkg/validator"
+
+	"github.com/manicar2093/fetch-receipt-processor-challenge/pkg/logger"
+	"github.com/manicar2093/fetch-receipt-processor-challenge/pkg/validator"
 
 	"github.com/coditory/go-errors"
 

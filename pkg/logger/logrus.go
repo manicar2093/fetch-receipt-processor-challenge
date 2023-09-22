@@ -4,7 +4,8 @@ import (
 	"io"
 	internalLog "log"
 	"os"
-	"template/pkg/config"
+
+	"github.com/manicar2093/fetch-receipt-processor-challenge/pkg/config"
 
 	"github.com/sirupsen/logrus"
 )

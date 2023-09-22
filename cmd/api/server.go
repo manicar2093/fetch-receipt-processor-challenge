@@ -1,12 +1,12 @@
 package main
 
 import (
-	"template/pkg/apperrors"
-	"template/pkg/config"
-	"template/pkg/logger"
-	"template/pkg/validator"
+	"github.com/manicar2093/fetch-receipt-processor-challenge/pkg/apperrors"
+	"github.com/manicar2093/fetch-receipt-processor-challenge/pkg/config"
+	"github.com/manicar2093/fetch-receipt-processor-challenge/pkg/logger"
+	"github.com/manicar2093/fetch-receipt-processor-challenge/pkg/validator"
 
-	_ "template/cmd/api/docs"
+	_ "github.com/manicar2093/fetch-receipt-processor-challenge/cmd/api/docs"
 
 	"github.com/labstack/echo/v4"
 	"github.com/labstack/echo/v4/middleware"
@@ -43,8 +43,6 @@ func NewServer(
 
 	server.configEcho()
 	server.configControllers()
-
-	logger.GetLogger().Info(server.echoInstance.Routes())
 
 	return server
 }
@@ -86,5 +84,5 @@ func (c *Server) configControllers() {
 	for _, controller := range c.controllers {
 		controller.SetUpRoutes(c.baseEndpoint)
 	}
-	echoroutesview.RegisterRoutesViewer(c.echoInstance)
+	echoroutesview.RegisterRoutesViewer(c.echoInstance) //nolint: errcheck
 }

@@ -5,7 +5,8 @@ import (
 	"fmt"
 	"net/http"
 	"net/http/httptest"
-	"template/pkg/apperrors"
+
+	"github.com/manicar2093/fetch-receipt-processor-challenge/pkg/apperrors"
 
 	"github.com/coditory/go-errors"
 	"github.com/labstack/echo/v4"

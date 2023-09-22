@@ -1,6 +1,5 @@
-.env
 .gitignore
-example.env
+.env.*
 Makefile
 package-lock.json
 package.json
@@ -11,3 +10,10 @@ prisma
 Dockerfile
 .golangci.yml
 mocks
+.air.toml
+.cz.toml
+.mockery.yml
+*.log
+*.md
+.bin
+.github
