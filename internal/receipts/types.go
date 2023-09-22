@@ -6,23 +6,25 @@ import (
 	"time"
 )
 
-type Date struct {
-	time.Time
-}
+type Date time.Time
 
 func (c *Date) UnmarshalJSON(data []byte) (err error) {
 	s := strings.Trim(string(data), "\"")
 	if s == "null" {
-		c.Time = time.Time{}
 		return
 	}
-	c.Time, err = time.Parse(time.DateOnly, s)
+	parsedTime, err := time.Parse(time.DateOnly, s)
+	if err != nil {
+		return
+	}
+	*c = Date(parsedTime)
 	return
 }
 
-func (c *Date) MarshalJSON() ([]byte, error) {
-	if c.Time.IsZero() {
-		return []byte("null"), nil
-	}
-	return []byte(fmt.Sprintf("\"%s\"", c.Time.Format(time.DateOnly))), nil
+func (c Date) MarshalJSON() ([]byte, error) {
+	return []byte(fmt.Sprintf("\"%s\"", time.Time(c).Format(time.DateOnly))), nil
+}
+
+func (c Date) Day() int {
+	return time.Time(c).Day()
 }
