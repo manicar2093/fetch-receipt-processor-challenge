@@ -6,6 +6,11 @@ definitions:
       message:
         type: string
     type: object
+  receipts.Date:
+    properties:
+      time.Time:
+        type: string
+    type: object
   receipts.FindPointsByReceiptIdOutput:
     properties:
       points:
@@ -25,43 +30,36 @@ definitions:
           $ref: '#/definitions/receipts.ReceiptItem'
         type: array
       purchaseDate:
-        type: string
+        $ref: '#/definitions/receipts.Date'
       purchaseTime:
         type: string
       retailer:
         type: string
       total:
-        type: number
+        example: "0"
+        type: string
+    required:
+    - purchaseDate
+    - purchaseTime
+    - retailer
+    - total
     type: object
   receipts.ReceiptItem:
     properties:
       price:
-        type: number
+        example: "0"
+        type: string
       shortDescription:
         type: string
+    required:
+    - price
+    - shortDescription
     type: object
 info:
   contact: {}
   title: fetch-receipt-processor-challenge
   version: 0.0.0
 paths:
-  /:
-    get:
-      consumes:
-      - application/json
-      description: Return a json content with a welcome message
-      produces:
-      - application/json
-      responses:
-        "200":
-          description: Demo data
-          schema:
-            type: string
-        "500":
-          description: Something unidentified has occurred
-      summary: Gets a json welcome message
-      tags:
-      - initial
   /receipts/{id}/points:
     get:
       consumes:
