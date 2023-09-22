@@ -21,7 +21,7 @@ var (
 )
 
 // @title		fetch-receipt-processor-challenge
-// @version	0.1.0
+// @version	0.1.1
 func main() {
 	var (
 		echoInstance    = echo.New()
