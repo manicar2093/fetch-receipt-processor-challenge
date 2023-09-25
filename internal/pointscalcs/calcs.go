@@ -1,6 +1,7 @@
 package pointscalcs
 
 import (
+	"fmt"
 	"math"
 	"strings"
 	"time"
@@ -118,6 +119,27 @@ func ByPurchaseTwoFourInterval(receipt receipts.Receipt) int {
 		"generated_points": points,
 		"calculator":       "ByPurchaseTwoFourInterval",
 	}).Debug("points calculation")
+
+	return points
+}
+
+func ByNotDuplicatedItems(receipt receipts.Receipt) int {
+	var (
+		points       int
+		isDuplicated bool
+		seenData     = make(map[string]bool)
+	)
+	for _, item := range receipt.Items {
+		key := fmt.Sprintf("%s-%f", item.ShortDescription, item.Price)
+		if seenData[key] {
+			isDuplicated = true
+			break
+		}
+		seenData[key] = true
+	}
+	if !isDuplicated {
+		points = len(receipt.Items) * 5
+	}
 
 	return points
 }
