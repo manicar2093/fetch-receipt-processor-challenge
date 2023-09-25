@@ -143,4 +143,46 @@ var _ = Describe("Calcs", func() {
 			Expect(got).To(Equal(expectedPoints))
 		})
 	})
+
+	Describe("ByNotDuplicatedItems", func() {
+		It("returns 5 per items if there no duplicated items", func() {
+			var (
+				expectedReceipt = receipts.Receipt{
+					Items: []receipts.ReceiptItem{
+						{ShortDescription: "Mountain Dew 12PK", Price: 6.49},
+						{ShortDescription: "Emils Cheese Pizza", Price: 12.25},
+						{ShortDescription: "Knorr Creamy Chicken", Price: 1.26},
+						{ShortDescription: "Doritos Nacho Cheese", Price: 3.35},
+						{ShortDescription: "   Klarbrunn 12-PK 12 FL OZ  ", Price: 12.00},
+					},
+				}
+				expectedPoints = 25
+			)
+
+			got := pointscalcs.ByNotDuplicatedItems(expectedReceipt)
+
+			Expect(got).To(Equal(expectedPoints))
+		})
+
+		When("there is a duplicated item", func() {
+			It("returns 0 point", func() {
+				var (
+					expectedReceipt = receipts.Receipt{
+						Items: []receipts.ReceiptItem{
+							{ShortDescription: "Mountain Dew 12PK", Price: 6.49},
+							{ShortDescription: "Mountain Dew 12PK", Price: 6.49},
+							{ShortDescription: "Knorr Creamy Chicken", Price: 1.26},
+							{ShortDescription: "Doritos Nacho Cheese", Price: 3.35},
+							{ShortDescription: "   Klarbrunn 12-PK 12 FL OZ  ", Price: 12.00},
+						},
+					}
+					expectedPoints = 0
+				)
+
+				got := pointscalcs.ByNotDuplicatedItems(expectedReceipt)
+
+				Expect(got).To(Equal(expectedPoints))
+			})
+		})
+	})
 })
