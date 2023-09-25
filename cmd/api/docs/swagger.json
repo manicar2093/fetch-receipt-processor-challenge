@@ -3,7 +3,7 @@
     "info": {
         "title": "fetch-receipt-processor-challenge",
         "contact": {},
-        "version": "0.1.0"
+        "version": "0.1.1"
     },
     "paths": {
         "/receipts/process": {

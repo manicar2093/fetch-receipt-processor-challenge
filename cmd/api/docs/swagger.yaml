@@ -53,7 +53,7 @@ definitions:
 info:
   contact: {}
   title: fetch-receipt-processor-challenge
-  version: 0.1.0
+  version: 0.1.1
 paths:
   /receipts/{id}/points:
     get:
